@@ -23,11 +23,16 @@ class Board
     def move_piece(start_pos, end_pos)
         #raise exceptions: no piece at start, can't move to end
 
-        raise "No piece at start_pos" if grid[start_pos[0]][start_pos[1]].is_a?(NullPiece)
-        raise "Can't move to end_pos" unless grid[end_pos[0]][end_pos[1]].is_a?(NullPiece)
+        raise "No piece at start_pos" if self[start_pos].is_a?(NullPiece)
+        raise "Can't move to end_pos" unless self[end_pos].is_a?(NullPiece)
 
-        grid[end_pos[0]][end_pos[1]] = grid[start_pos[0]][start_pos[1]]
-        grid[start_pos[0]][start_pos[1]] = NullPiece.new
+        self[end_pos] = self[start_pos]
+        #grid[start_pos[0]][start_pos[1]] = NullPiece.new
+        self[start_pos] = NullPiece.new
+    end
+
+    def valid_pos?(pos)
+        (0..7).include?(pos[0]) && (0..7).include?(pos[1])
     end
 
     def [](pos)
