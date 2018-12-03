@@ -9,13 +9,13 @@ class Board
     def place_pieces
         array = []
         2.times do |i|
-            array << Array.new(8){Piece.new}
+            array << Array.new(8){Piece.new("black")}
         end
         4.times do |i|
-            array << Array.new(8){NullPiece.new}
+            array << Array.new(8){NullPiece.new("white")}
         end
         2.times do |i|
-            array << Array.new(8){Piece.new}
+            array << Array.new(8){Piece.new("white")}
         end
         array
     end
@@ -45,12 +45,21 @@ class Board
         grid[x][y] = val
     end
 
-    def render
-        puts "    " + (0..7).to_a.join("    ")
+    #Display.new(Board.new).render
+    def render(cursor_pos)
+        puts "  " + (0..7).to_a.join("    ")
         grid.each_with_index do |row, i|
-            puts "#{i} #{row.map{|space| space.to_s}}"
-        end
+            string = "#{i} "
+            row.each_with_index do |position, j|
+                if [i,j] == cursor_pos
+                    string += "#{position}".colorize(:color => :blue, :background => :light_magenta)
+                else
+                    string += "#{position}".colorize(position.select_color)
+                end
+                string += "    "
+            end
 
-        puts "poop"
+            puts string
+        end
     end
 end

@@ -8,11 +8,15 @@ class Display
         @board = board
     end
 
-
     def render
         until @cursor.get_input == @cursor.cursor_pos
-            @board.render
+            system('clear')
+            @board.render(@cursor.cursor_pos)
             @cursor.get_input
+            #toggle here
+            system('clear')
+            @board.render(@cursor.cursor_pos)
+
         end
     end
 end
