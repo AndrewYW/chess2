@@ -44,4 +44,13 @@ class Board
         x, y = pos
         grid[x][y] = val
     end
+
+    def render
+        puts "    " + (0..7).to_a.join("    ")
+        grid.each_with_index do |row, i|
+            puts "#{i} #{row.map{|space| space.to_s}}"
+        end
+
+        puts "poop"
+    end
 end

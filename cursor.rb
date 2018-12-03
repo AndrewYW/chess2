@@ -93,4 +93,5 @@ class Cursor
    move = @cursor_pos.merge(diff) 
    board.move_piece(@cursor_pos, move) if board.valid_pos?(move)
   end
+  
 end
